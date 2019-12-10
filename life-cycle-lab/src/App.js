@@ -9,13 +9,21 @@ class App extends React.Component {
     super();
     this.state = { test: 'test shown'}
   }
+  handleTextChange = (event) => {
+    this.setState({
+      test: event.target.value
+    })
+  }
   notify = () => {
-    toast('that was easy');
+    let {test} = this.state
+    toast(test);
   }
   render(){
   return (
     <div className="App">
-      <button onClick = {this.notify}>CLICK ME!</button>
+      <form onSubmit = {this.notify}>
+        <input type = 'text' onChange = {this.handleTextChange}></input>
+      </form>
     </div>
   );
 }
