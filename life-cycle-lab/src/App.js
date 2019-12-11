@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import InputBox from './Components/InputBox';
 import ToDoList from './Components/todoList';
+// import { element } from 'prop-types';
 
 toast.configure();
 class App extends React.Component {
@@ -32,6 +33,7 @@ class App extends React.Component {
     let {test, listItems} = this.state;
     toast(test);
 
+    // let newListItemsCopy = [...listItems, { item: test }];
     let newListItemsCopy = [...listItems];
 
     newListItemsCopy.push({
@@ -39,9 +41,29 @@ class App extends React.Component {
     })
 
     this.setState({
-      listItems: newListItemsCopy
+      listItems: newListItemsCopy,
+      test: ''
     })
-    console.log(`new list`, newListItemsCopy, `old list`, listItems)
+    console.log(`submitted new list`, newListItemsCopy, `old list`, listItems)
+  }
+  deleteToDo = (event) => {
+    event.preventDefault();
+    let newArr = [];
+    for(let i of this.state.allToDos) {
+      newArr.push(i);
+    }
+
+    for(let i = 0; i < newArr.length; i++) {
+      if(newArr[i].toDo === event.target.id) {
+        console.log("hi")
+        newArr.splice(i, 1)
+      }
+    }
+
+    this.setState({
+      allToDos: newArr
+    })
+
   }
 
   render(){
@@ -55,7 +77,8 @@ class App extends React.Component {
     </div>
     <div className = 'list-stage'>
       <ToDoList listItems = {listItems}
-      test = {test}/>
+      test = {test}
+      key = {test}/>
     </div>
     </div>
   );
