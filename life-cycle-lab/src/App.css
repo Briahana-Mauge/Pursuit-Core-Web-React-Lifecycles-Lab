@@ -1,3 +1,14 @@
 .App {
   text-align: center;
 }
+.created{
+  font-size: 20px;
+  font-weight: 600;
+  color: black;
+  height: 30px;
+}
+.deleted{
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
