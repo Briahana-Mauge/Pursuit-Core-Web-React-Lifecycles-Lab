@@ -11,6 +11,7 @@ class ToDoList extends React.Component {
     }
     componentDidMount() {
         console.log(`toDo List component mounted`);
+        console.log("todo List props", this.props)
     }
     componentWillUnmount() {
         console.log(`toDo List component unmounted`);
@@ -19,11 +20,12 @@ class ToDoList extends React.Component {
         console.log(`toDo List component rendered`)
 
         const todoItem = this.props.listItems.map((todo) => {
-            const location = this.props.listItems.indexOf(todo)
+            let location = this.props.listItems.indexOf(todo)
             return (
                 <ToDo todo = {todo.item}
                 key = {todo.item}
-                location  = {location}/>
+                location  = {location}
+                delete = {this.props.handleDeleteTodo}/>
                 )
         })
         return (
