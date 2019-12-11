@@ -8,81 +8,77 @@ import ToDoList from './Components/todoList';
 
 toast.configure();
 class App extends React.Component {
-  constructor(){
+  constructor() {
     super();
-    this.state = { 
-      test: '',
+    this.state = {
+      text: '',
       listItems: [],
       deleted: 'deleted'
     }
   }
   componentDidMount() {
     console.log(`app component mounted`);
-    
+
   };
   componentDidUpdate() {
     console.log(`app component updated`);
   }
   handleTextChange = (event) => {
     this.setState({
-      test: event.target.value
+      text: event.target.value
     })
   }
   handleSubmit = (event) => {
     event.preventDefault();
-    let {test, listItems} = this.state;
-    toast(test);
+    let { text, listItems } = this.state;
+    toast(text);
 
-    // let newListItemsCopy = [...listItems, { item: test }];
-    let newListItemsCopy = [...listItems];
+    let newListItemsCopy = [...listItems, { item: text }];
 
-    newListItemsCopy.push({
-      item: test
-    })
+    //replaced the following commented code with the above code
+          // let newListItemsCopy = [...listItems];
+          // newListItemsCopy.push({
+          //   item: text
+          // });
 
     this.setState({
       listItems: newListItemsCopy,
-      test: ''
-    })
-    console.log(`submitted new list`, newListItemsCopy, `old list`, listItems)
+      text: ''
+    });
   }
-  deleteToDo = (event) => {
+  handleDeleteTodo = (event) => {
+    let { listItems } = this.state;
     event.preventDefault();
-    let newArr = [];
-    for(let i of this.state.allToDos) {
-      newArr.push(i);
-    }
 
-    for(let i = 0; i < newArr.length; i++) {
-      if(newArr[i].toDo === event.target.id) {
-        console.log("hi")
-        newArr.splice(i, 1)
-      }
-    }
+    let deleted = listItems[event.target.id].item;
+    toast(deleted);
+
+    let position = event.target.id;
+    listItems.splice(position, 1);
 
     this.setState({
-      allToDos: newArr
-    })
-
+      listItems: listItems
+    });
   }
 
-  render(){
-    let {test, listItems} = this.state
-  return (
-    <div className="App">
-      <div className = 'input-stage'>
-      <InputBox submit={this.handleSubmit}
+  render() {
+    let { text, listItems } = this.state
+    return (
+      <div className="App">
+        <div className='input-stage'>
+          <InputBox submit={this.handleSubmit}
             handleTextChange={this.handleTextChange}
-            test = {test}/>
-    </div>
-    <div className = 'list-stage'>
-      <ToDoList listItems = {listItems}
-      test = {test}
-      key = {test}/>
-    </div>
-    </div>
-  );
-}
+            text={text} />
+        </div>
+        <div className='list-stage'>
+          <ToDoList listItems={listItems}
+            text={text}
+            key={text}
+            handleDeleteTodo={this.handleDeleteTodo} />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
