@@ -1,29 +1,32 @@
 import React from 'react';
+import ToDo from './toDo';
 
-class ToDoList extends React.Component{
-    constructor(){
+class ToDoList extends React.Component {
+    constructor() {
         super();
-        console.log(`toDo constructor called`)
+        console.log(`toDo List constructor called`)
     }
-    componentDidUpdate(){
-        console.log(`toDo component updated`);
-      }
-    componentDidMount(){
-        console.log(`toDo component mounted`);
+    componentDidUpdate() {
+        console.log(`toDo List component updated`);
     }
-    componentWillUnmount(){
-        console.log(`toDo component unmounted`);
+    componentDidMount() {
+        console.log(`toDo List component mounted`);
     }
-    render(){
-        console.log(`toDo component rendered`)
-        
-            const todoItem = this.props.listItems.map((todo) => {
-                return(
-                    <li className = 'todo'>{todo.item}</li>
-                )
-            })
+    componentWillUnmount() {
+        console.log(`toDo List component unmounted`);
+    }
+    render() {
+        console.log(`toDo List component rendered`)
 
-        return(
+        const todoItem = this.props.listItems.map((todo) => {
+            const location = this.props.listItems.indexOf(todo)
+            return (
+                <ToDo todo = {todo.item}
+                key = {todo.item}
+                location  = {location}/>
+                )
+        })
+        return (
             <ul>{todoItem}</ul>
         )
     }
