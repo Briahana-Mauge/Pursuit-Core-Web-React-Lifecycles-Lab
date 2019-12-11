@@ -23,7 +23,7 @@ class ToDoList extends React.Component {
             let location = this.props.listItems.indexOf(todo)
             return (
                 <ToDo todo = {todo.item}
-                key = {todo.item}
+                key = {location}
                 location  = {location}
                 delete = {this.props.handleDeleteTodo}/>
                 )
