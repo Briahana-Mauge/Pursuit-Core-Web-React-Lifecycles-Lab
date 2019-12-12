@@ -10,8 +10,7 @@ class App extends React.Component {
     super();
     this.state = {
       text: '',
-      listItems: [],
-      deleted: 'deleted'
+      listItems: []
     }
   }
   componentDidMount() {
@@ -33,7 +32,8 @@ class App extends React.Component {
     let { text, listItems } = this.state;
 
     toast.success(`Todo Created: ${text}`, {
-      className: "created"
+      className: "created",
+      autoClose: 6000
     });
 
     let newListItemsCopy = [...listItems, { item: text }];
@@ -56,7 +56,8 @@ class App extends React.Component {
 
     let deleted = listItems[event.target.id].item;
     toast.error(`Todo Deleted: ${deleted}`, {
-      className: "deleted"
+      className: "deleted",
+      autoClose: 5000
     });
 
     let position = event.target.id;
