@@ -1,10 +1,14 @@
 .App {
   text-align: center;
 }
+h3{
+  text-decoration: underline;
+  margin-left: 5px
+}
 .created{
   font-size: 20px;
   font-weight: 600;
-  color: black;
+  color: white;
   height: 30px;
 }
 .deleted{
@@ -12,3 +16,39 @@
   font-weight: 600;
   color: white;
 }
+.input-stage ul{
+  list-style: none;
+  float: center;
+  padding: 0;
+}
+button{
+  border: none;
+  padding: 0px;
+  margin-right: 10px;
+  color: red;
+}
+
+.completed-stage{
+  float: left;
+  text-align: start;
+}
+.completed-stage ul {
+  margin: 0;
+  list-style: square;
+  width: 150px;
+}
+.list-stage{
+  display: inline-block;
+  width: 350px;
+  text-align: center;
+}
+.input-stage{
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.Toastify__toast {
+  width: 60%;
+  height:auto;
+  float: right;
+} 
