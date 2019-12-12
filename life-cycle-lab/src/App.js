@@ -4,13 +4,15 @@ import { toast, ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import InputBox from './Components/InputBox';
 import ToDoList from './Components/todoList';
+import CompletedList from './Components/completedList'
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       text: '',
-      listItems: []
+      listItems: [],
+      completedItems: []
     }
   }
   componentDidMount() {
@@ -33,7 +35,8 @@ class App extends React.Component {
 
     toast.success(`Todo Created: ${text}`, {
       className: "created",
-      autoClose: 6000
+      autoClose: 6000,
+      position: toast.POSITION.BOTTOM_RIGHT
     });
 
     let newListItemsCopy = [...listItems, { item: text }];
@@ -51,38 +54,48 @@ class App extends React.Component {
   }
 
   handleDeleteTodo = (event) => {
-    let { listItems } = this.state;
+    let { listItems, completedItems } = this.state;
     event.preventDefault();
 
     let deleted = listItems[event.target.id].item;
     toast.error(`Todo Deleted: ${deleted}`, {
       className: "deleted",
-      autoClose: 5000
+      autoClose: 5000,
+      position: toast.POSITION.BOTTOM_RIGHT
     });
+
+    let newCompletedItemsCopy = [...completedItems, { item: deleted }];
 
     let position = event.target.id;
     listItems.splice(position, 1);
 
     this.setState({
-      listItems: listItems
+      listItems: listItems,
+      completedItems: newCompletedItemsCopy
     });
   };
 
   render() {
-    let { text, listItems } = this.state
+    let { text, listItems, completedItems } = this.state
     return (
       <div className="App">
         <div className='input-stage'>
           <InputBox submit={this.handleSubmit}
             handleTextChange={this.handleTextChange}
             text={text} />
-        </div>
+
         <div className='list-stage'>
           <ToDoList listItems={listItems}
-            text={text}
-            key={text}
             handleDeleteTodo={this.handleDeleteTodo} />
         </div>
+
+        </div>
+
+        <div className='completed-stage'>
+            <h3>Completed Todos</h3>
+          <CompletedList completedItems={completedItems}/>
+        </div>
+        
         <ToastContainer
           transition={Zoom}
         />
