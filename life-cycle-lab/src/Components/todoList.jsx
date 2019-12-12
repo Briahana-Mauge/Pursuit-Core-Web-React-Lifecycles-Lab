@@ -20,7 +20,7 @@ class ToDoList extends React.Component {
         console.log(`toDo List component rendered`)
 
         const todoItem = this.props.listItems.map((todo) => {
-            let location = this.props.listItems.indexOf(todo)
+            let location = this.props.listItems.indexOf(todo);
             return (
                 <ToDo todo = {todo.item}
                 key = {location}
